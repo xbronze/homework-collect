@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.homeworkcollect.dao.ReportMapper">
+
+    <resultMap id="reportResultMap" type="com.homeworkcollect.entity.Report">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="reportName" column="report_name" />
+        <result property="reportContext" column="report_context" />
+        <result property="deadlineTime" column="deadline_time" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="deleted" column="deleted" />
+    </resultMap>
+
+    <resultMap id="reportVOResultMap" type="com.homeworkcollect.entity.vo.ReportVO">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="reportName" column="report_name" />
+        <result property="reportContext" column="report_context" />
+        <result property="deadlineTime" column="deadline_time"/>
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <select id="selectReportByUserId" resultType="com.homeworkcollect.entity.vo.ReportVO">
+        select * from  report where user_id = #{userId} and deleted = 0
+    </select>
+</mapper>
