@@ -14,4 +14,6 @@ public interface ReportMapper {
 
     List<ReportVO> selectReportByUserId(Integer userId);
 
+    int insertReport(Report report);
+
 }

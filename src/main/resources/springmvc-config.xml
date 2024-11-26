@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 指定Spring MVC扫描的包 -->
-    <context:component-scan base-package="com.homeworkcollect" />
+    <context:component-scan base-package="com.homeworkcollect.controller" />
 
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
@@ -16,22 +16,11 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <mvc:annotation-driven>
-<!--        <mvc:message-converters>-->
-<!--            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-<!--                <property name="objectMapper">-->
-<!--                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">-->
-<!--                        <property name="dateFormat">-->
-<!--                            <bean class="java.text.SimpleDateFormat">-->
-<!--                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />-->
-<!--                            </bean>-->
-<!--                        </property>-->
-<!--                    </bean>-->
-<!--                </property>-->
-<!--            </bean>-->
-<!--        </mvc:message-converters>-->
-    </mvc:annotation-driven>
+    <mvc:annotation-driven />
 
     <mvc:view-controller path="/login" view-name="login" />
     <mvc:view-controller path="/register" view-name="register" />
+    <mvc:view-controller path="/report" view-name="report_add_modify" />
+    <mvc:view-controller path="/fileUpload" view-name="fileUpload" />
+
 </beans>

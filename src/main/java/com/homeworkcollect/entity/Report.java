@@ -14,6 +14,7 @@ public class Report {
 
     private Integer id;
     private Integer userId;
+    private String reportCode;
     private String reportName;
     private String reportContext;
     private Date deadlineTime;

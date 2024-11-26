@@ -17,12 +17,62 @@
     <resultMap id="reportVOResultMap" type="com.homeworkcollect.entity.vo.ReportVO">
         <id property="id" column="id" />
         <result property="userId" column="user_id" />
+        <result property="reportCode" column="report_code" />
         <result property="reportName" column="report_name" />
         <result property="reportContext" column="report_context" />
         <result property="deadlineTime" column="deadline_time"/>
         <result property="createTime" column="create_time" />
         <result property="updateTime" column="update_time" />
     </resultMap>
+    <insert id="insertReport" parameterType="com.homeworkcollect.entity.Report">
+        insert into report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                user_id,
+            </if>
+            <if test="reportCode != null and reportCode != ''">
+                report_code,
+            </if>
+            <if test="reportName != null and reportName != ''">
+                report_name,
+            </if>
+            <if test="reportContext != null and reportContext != ''">
+                report_context,
+            </if>
+            <if test="deadlineTime != null and deadlineTime != ''">
+                deadline_time,
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time,
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                #{userId, jdbcType=INTEGER},
+            </if>
+            <if test="reportCode != null and reportCode != ''">
+                #{reportCode, jdbcType=VARCHAR},
+            </if>
+            <if test="reportName != null and reportName != ''">
+                #{reportName, jdbcType=VARCHAR},
+            </if>
+            <if test="reportContext != null and reportContext != ''">
+                #{reportContext, jdbcType=VARCHAR},
+            </if>
+            <if test="deadlineTime != null and deadlineTime != ''">
+                #{deadlineTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
     <select id="selectReportByUserId" resultType="com.homeworkcollect.entity.vo.ReportVO">
         select * from  report where user_id = #{userId} and deleted = 0
