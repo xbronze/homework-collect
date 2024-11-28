@@ -19,8 +19,19 @@
     <mvc:annotation-driven />
 
     <mvc:view-controller path="/login" view-name="login" />
-    <mvc:view-controller path="/register" view-name="register" />
-    <mvc:view-controller path="/report" view-name="report_add_modify" />
-    <mvc:view-controller path="/fileUpload" view-name="fileUpload" />
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- 拦截器 -->
+        <mvc:interceptor>
+            <!-- 指定拦截的请求 -->
+            <mvc:mapping path="/**"/>
+            <!-- 指定拦截器不拦截的请求 -->
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/user/loginCheck"/>
+            <!-- 指定拦截器 -->
+            <bean class="com.homeworkcollect.interceptor.CheckRoleHandlerInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

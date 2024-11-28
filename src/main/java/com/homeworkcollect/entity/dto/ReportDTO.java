@@ -1,8 +1,10 @@
 package com.homeworkcollect.entity.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: xbronze
@@ -12,9 +14,13 @@ import java.util.Date;
 @Data
 public class ReportDTO {
 
+    private Integer id;
     private String reportName;
     private String reportContext;
-    private String deadlineTime;
-    private String[] attachments;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date deadlineTime;
+
+    private List<String> attachments;
 
 }

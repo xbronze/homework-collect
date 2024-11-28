@@ -14,6 +14,17 @@ public interface ReportMapper {
 
     List<ReportVO> selectReportByUserId(Integer userId);
 
+    List<ReportVO> selectReportAndAttachmentByUserId(Integer userId);
+
     int insertReport(Report report);
+
+    int updateReport(Report report);
+
+    /**
+     * 课程报告删除（逻辑删除）
+     * @param id
+     * @return
+     */
+    int deleteReportById(Integer id);
 
 }

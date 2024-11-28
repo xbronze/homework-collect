@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.homeworkcollect.dao.ReportAttachmentMapper">
+
+    <insert id="insertReportAttachment" keyProperty="id" useGeneratedKeys="true" parameterType="com.homeworkcollect.entity.ReportAttachment">
+        insert into report_attachment (report_id, address, create_time, update_time) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.reportId}, #{item.address}, #{item.createTime}, #{item.updateTime})
+        </foreach>
+    </insert>
+
+    <update id="deleteReportAttachmentByReportId" parameterType="integer">
+        update report_attachment set deleted = 1 where report_id = #{reportId}
+    </update>
+
+    <select id="selectReportAttachmentByReportId" resultType="com.homeworkcollect.entity.ReportAttachment">
+        select * from report_attachment where report_id = #{reportId} and deleted = 0
+    </select>
+</mapper>

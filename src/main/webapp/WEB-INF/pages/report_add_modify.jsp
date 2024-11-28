@@ -43,6 +43,7 @@
             };
             xhr.send(formData);
         }
+
     </script>
 </head>
 <body>
