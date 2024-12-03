@@ -1,6 +1,7 @@
 package com.homeworkcollect.dao;
 
 import com.homeworkcollect.entity.ReportAttachment;
+import com.homeworkcollect.entity.vo.ReportAttachmentVO;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface ReportAttachmentMapper {
 
     int insertReportAttachment(List<ReportAttachment> list);
 
-    List<ReportAttachment> selectReportAttachmentByReportId(int reportId);
+    List<ReportAttachmentVO> selectReportAttachmentVOByReportId(int reportId);
 
     int deleteReportAttachmentByReportId(int reportId);
 

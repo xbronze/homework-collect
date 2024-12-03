@@ -27,7 +27,7 @@ public class ReportVO implements Serializable {
     private Date deadlineTime;
     private Date createTime;
     private Date updateTime;
-    private List<ReportAttachment> attachmentList;
+//    private List<ReportAttachment> attachmentList;
 
     public String formateDate(Date date) {
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");

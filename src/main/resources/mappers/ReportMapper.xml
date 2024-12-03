@@ -14,24 +14,6 @@
         <result property="deleted" column="deleted" />
     </resultMap>
 
-    <resultMap id="reportVOResultMap" type="com.homeworkcollect.entity.vo.ReportVO">
-        <id property="id" column="id" />
-        <result property="userId" column="user_id" />
-        <result property="reportCode" column="report_code" />
-        <result property="reportName" column="report_name" />
-        <result property="reportContext" column="report_context" />
-        <result property="deadlineTime" column="deadline_time"/>
-        <result property="createTime" column="create_time" />
-        <result property="updateTime" column="update_time" />
-        <collection property="attachmentList" column="id" ofType="com.homeworkcollect.entity.ReportAttachment"
-                    resultMap="ReportAttachmentResultMap" />
-    </resultMap>
-
-    <resultMap id="ReportAttachmentResultMap" type="com.homeworkcollect.entity.ReportAttachment">
-        <id property="id" column="aid" />
-        <result property="address" column="address" />
-    </resultMap>
-
     <insert id="insertReport" keyProperty="id" useGeneratedKeys="true" parameterType="com.homeworkcollect.entity.Report">
         insert into report (user_id, report_code, report_name, report_context, deadline_time, create_time, update_time)
         values (
@@ -45,14 +27,6 @@
                )
 
     </insert>
-
-    <select id="selectReportAndAttachmentByUserId" resultMap="reportVOResultMap">
-        select r.id, r.user_id, r.report_code, r.report_name, r.report_context, r.deadline_time, r.create_time, r.update_time,
-               a.id as aid, a.address
-        from report r
-        left join report_attachment a on a.report_id = r.id
-        where r.user_id = #{userId}
-    </select>
 
     <update id="updateReport" parameterType="com.homeworkcollect.entity.Report">
         update report
@@ -69,7 +43,11 @@
         update report set deleted = 1 where id = #{id}
     </update>
 
-    <select id="selectReportByUserId" resultMap="reportVOResultMap">
-        select * from report where user_id = #{userId} and deleted = 0
+    <select id="selectReportById" resultMap="reportResultMap">
+        select * from report where id = #{reportId} and deleted = 0
+    </select>
+
+    <select id="selectReportListByUserId" resultType="com.homeworkcollect.entity.Report">
+        select * from report where user_id = #{userId} and deleted = 0 order by create_time desc
     </select>
 </mapper>

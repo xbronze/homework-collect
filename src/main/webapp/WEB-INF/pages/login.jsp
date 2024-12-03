@@ -12,7 +12,9 @@
     <title>用户登录</title>
     <style>
       body {
+        height: 95%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
       }
@@ -27,19 +29,19 @@
   </head>
 <body>
 
+  <br />
   <div class="login-container" style="text-align: center">
-    <c:if test="${not empty msg && !''.equals(msg)}">
-      <h2>提示：${msg}</h2>
-    </c:if>
     <h3>登录</h3>
     <form action="${pageContext.request.contextPath}/user/loginCheck" method="post">
       <input type="text" name="username" placeholder="用户名" required><br/>
       <input type="password" name="password" placeholder="密码" required><br/>
       <button type="submit">登录</button>
-<%--      <a href="${pageContext.request.contextPath}/register">还没有账号？注册</a>--%>
+      <%--      <a href="${pageContext.request.contextPath}/register">还没有账号？注册</a>--%>
     </form>
   </div>
-
+  <div>
+    <h5 style="color: red">${msg}</h5>
+  </div>
 
 </body>
 </html>

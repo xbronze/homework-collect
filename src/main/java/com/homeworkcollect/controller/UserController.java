@@ -30,33 +30,17 @@ public class UserController {
     @Autowired
     private IReportService reportService;
 
-    @RequestMapping("/index")
-    public ModelAndView index(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            modelAndView.setViewName("login");
-            modelAndView.addObject("msg", "请先登录");
-            return modelAndView;
-        }
-        modelAndView.setViewName("index");
-        // 显示当前用户布置的实验报告列表
-        List<ReportVO> reportList = reportService.getReportListByUserId(user.getId());
-        modelAndView.addObject("reportList", reportList);
-        return modelAndView;
-    }
-
     @RequestMapping("/loginCheck")
     public String loginCheck(@RequestParam("username") String username, @RequestParam("password") String password,
                              HttpServletRequest request, Model model) {
         User user = userService.checkLogin(username, password);
         if (user == null) {
-            model.addAttribute("msg", "输入的账号密码错误，请重新登录");
+            model.addAttribute("msg", "输入的账号密码错误，请重新输入");
             return "login";
         }
         // 登录成功，session保存当前登录用户的信息
         request.getSession().setAttribute("user", user);
-        return "redirect:/user/index";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

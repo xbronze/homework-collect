@@ -1,11 +1,9 @@
 package com.homeworkcollect.controller;
 
-import com.homeworkcollect.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author: xbronze
@@ -15,14 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
+    /**
+     * 首页重定向到 实验报告列表页面
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        } else  {
-            return "redirect:/report/list";
-        }
+        return "redirect:/report/list";
     }
 
 }

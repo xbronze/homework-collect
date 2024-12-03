@@ -12,9 +12,7 @@ import java.util.List;
  */
 public interface ReportMapper {
 
-    List<ReportVO> selectReportByUserId(Integer userId);
-
-    List<ReportVO> selectReportAndAttachmentByUserId(Integer userId);
+    Report selectReportById(Integer reportId);
 
     int insertReport(Report report);
 
@@ -27,4 +25,5 @@ public interface ReportMapper {
      */
     int deleteReportById(Integer id);
 
+    List<Report> selectReportListByUserId(Integer userId);
 }

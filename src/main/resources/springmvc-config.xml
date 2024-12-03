@@ -16,9 +16,15 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <!-- 配置不拦截JS静态资源 -->
+    <mvc:resources mapping="/js/**" location="/resources/js/" />
+    <mvc:resources mapping="/css/**" location="/resources/css/" />
+    <mvc:resources mapping="/img/**" location="/resources/img/" />
+
     <mvc:annotation-driven />
 
     <mvc:view-controller path="/login" view-name="login" />
+    <mvc:view-controller path="/report_add_modify" view-name="report_add_modify" />
 
     <!-- 配置拦截器 -->
     <mvc:interceptors>

@@ -19,7 +19,7 @@ public class CustExceptionHandler {
     public ModelAndView handleException1(Exception exception) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("exp", exception);
-        mav.setViewName("customExp");
+        mav.setViewName("no_login_exp");
         return mav;
     }
 

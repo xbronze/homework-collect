@@ -15,6 +15,8 @@ import java.util.List;
 public class ReportDTO {
 
     private Integer id;
+    private Integer userId;
+    private String reportCode;
     private String reportName;
     private String reportContext;
 

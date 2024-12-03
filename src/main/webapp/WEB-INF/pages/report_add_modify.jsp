@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/css" src="${pageContext.request.contextPath}/resources/css/style.css" />
     <title>实验报告</title>
     <script>
         function uploadFile(event) {
@@ -47,25 +48,33 @@
     </script>
 </head>
 <body>
-    <div>
-<%--        <form onsubmit="submitForm(event)" enctype="multipart/form-data">--%>
-        <form action="${pageContext.request.contextPath}/report/add" method="post">
-            <label for="reportName">实验报告名称:</label>
-            <input type="text" id="reportName" name="reportName" required><br><br>
+    <div class="container">
+        <div class="container-body">
+            <%--        <form onsubmit="submitForm(event)" enctype="multipart/form-data">--%>
+            <form action="${pageContext.request.contextPath}/report/submitContext" method="post">
+                <input type="text" name="id" value="${reportVO.id}" hidden="hidden">
 
-            <label for="reportContext">实验报告内容要求:</label>
-            <input type="text" id="reportContext" name="reportContext" required><br><br>
+                <label for="reportCode">实验报告编号:</label>
+                <input type="text" id="reportCode" name="reportCode" value="${report.reportCode}" readonly="readonly"><br><br>
 
-            <label for="deadlineTime">报告截止时间:</label>
-            <input type="date" id="deadlineTime" name="deadlineTime" required><br><br>
+                <label for="reportName">实验报告名称:</label>
+                <input type="text" id="reportName" name="reportName" value="${report.reportName}" required><br><br>
 
-            <label for="filesInput">选择文件:</label>
-            <input type="file" id="filesInput" multiple="multiple" name="filesInput" onchange="uploadFile(event)"><br><br>
+                <label for="reportContext">实验报告内容要求:</label>
+                <input type="text" id="reportContext" name="reportContext" value="${report.reportContext}" required><br><br>
 
-            <input type="hidden" id="attachments" name="attachments"><br><br>
+                <label for="deadlineTime">报告截止时间:</label>
+                <input type="date" id="deadlineTime" name="deadlineTime" value="${report.formateDate(report.deadlineTime)}" required><br><br>
 
-            <input type="submit" value="提交">
-        </form>
+<%--                <label for="filesInput">选择文件:</label>--%>
+<%--                <input type="file" id="filesInput" multiple="multiple" name="filesInput" onchange="uploadFile(event)"><br><br>--%>
+
+<%--                <input type="hidden" id="attachments" name="attachments"><br><br>--%>
+
+                <input type="submit" value="提交">
+                <input type="reset" value="重置">
+            </form>
+        </div>
     </div>
 </body>
 </html>
