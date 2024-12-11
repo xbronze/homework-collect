@@ -39,6 +39,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
     <script type="application/javascript">
         function toReportAddModify() {
             window.location.href = "${pageContext.request.contextPath}/report/reportAddModify";
@@ -46,9 +47,7 @@
     </script>
 </head>
 <body>
-    <div>
-        <h3>欢迎登录，${sessionScope.get("user").name}</h3>
-    </div>
+    <jsp:include page="hear_tab.jsp" />
 
     <div>
         <div class="report_sector">
@@ -63,29 +62,23 @@
                     <label>报告编码：</label><span>${report.reportCode}</span>
                 </div>
                 <div class="report_item">
-                    <label>上交截止日期：</label><span>${report.formateDate(report.deadlineTime)}</span>
+                    <label>报告简介：</label><span>${report.reportIntroduction}</span>
                 </div>
                 <div class="report_item">
-                    <label>报告内容：</label><p class="report_context_p">${report.reportContext}</p>
+                    <label>上交截止日期：</label><span>${report.formateDate(report.deadlineTime)}</span>
                 </div>
+<%--                <div class="report_item">--%>
+<%--                    <label>报告内容：</label>--%>
+<%--                    <div>${report.reportContext}</div>--%>
+<%--                </div>--%>
                 <div class="report_button">
                     <button onclick="window.location.href='${pageContext.request.contextPath}/report/detail/context/${report.id}'">详情</button>
                     <button onclick="window.location.href='${pageContext.request.contextPath}/report/detail/modify/${report.id}'">编辑</button>
-                    <button>删除</button>
+                    <button onclick="window.location.href='${pageContext.request.contextPath}/report/remove/${report.id}'">删除</button>
                 </div>
             </div>
 
         </c:forEach>
-<%--        <table>--%>
-<%--            <c:forEach items="${reportList}" var="report">--%>
-<%--                <tr>--%>
-<%--                    <td>报告编号：</td><td>${report.id}</td>--%>
-<%--                    <td>报告名称：</td><td>${report.reportName}</td>--%>
-<%--                    <td>报告内容：</td><td>${report.reportContext}</td>--%>
-<%--                    <td>报告截止提交日期：</td><td>${report.formateDate(report.deadlineTime)}</td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--        </table>--%>
     </div>
 </body>
 </html>

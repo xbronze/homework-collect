@@ -28,6 +28,7 @@ public class ReportAttachmentServiceImpl implements IReportAttachmentService {
             reportAttachmentVOList.forEach(reportAttachmentVO -> {
                 String address = reportAttachmentVO.getAddress();
                 reportAttachmentVO.setFileName(address.substring(address.indexOf("@") + 1));
+                // TODO 这里的minio地址直接定义，后续再使用配置文件定义
                 reportAttachmentVO.setDownloadUrl("http://117.78.2.154:9100/homework-collect/" + address);
             });
             return reportAttachmentVOList;

@@ -18,6 +18,7 @@ public class ReportDTO {
     private Integer userId;
     private String reportCode;
     private String reportName;
+    private String reportIntroduction;
     private String reportContext;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

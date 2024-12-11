@@ -20,7 +20,7 @@ public class IndexController {
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpServletRequest request) {
-        return "redirect:/report/list";
+        return "index";
     }
 
 }

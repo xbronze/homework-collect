@@ -1,5 +1,6 @@
 package com.homeworkcollect.controller;
 
+import cn.hutool.http.HtmlUtil;
 import com.homeworkcollect.custexception.NotLoginException;
 import com.homeworkcollect.entity.Report;
 import com.homeworkcollect.entity.User;
@@ -42,6 +43,10 @@ public class ReportController {
         // 显示当前用户布置的实验报告列表
         User user = (User) request.getSession().getAttribute("user");
         List<Report> reportList = reportService.getReportListByUserId(user.getId());
+        reportList.forEach(report -> {
+            // 还原被转义的HTML特殊字符
+            report.setReportContext(HtmlUtil.unescape(report.getReportContext()));
+        });
         modelAndView.addObject("reportList", reportList);
         return modelAndView;
     }
@@ -54,16 +59,19 @@ public class ReportController {
             throw new RuntimeException("reportId is null");
         }
         ModelAndView modelAndView = new ModelAndView();
+        Report report = reportService.queryReportById(reportId);
+        if (report.getReportContext() != null && report.getReportContext().length() > 0) {
+            // 还原被转义的HTML特殊字符
+            report.setReportContext(HtmlUtil.unescape(report.getReportContext()));
+        }
+        modelAndView.addObject("report", report);
         if ("modify".equals(type)) {
-            Report report = reportService.queryReportById(reportId);
-            modelAndView.addObject("report", report);
             modelAndView.setViewName("report_add_modify");
         }
         if ("context".equals(type)) {
-            Report report = reportService.queryReportById(reportId);
-            modelAndView.addObject("report", report);
-            List<ReportAttachmentVO> reportAttachmentVOList = reportAttachmentService.queryReportAttachmentVOList(reportId);
-            modelAndView.addObject("reportAttachmentVOList", reportAttachmentVOList);
+            // TODO 暂时不实现附件的功能
+//            List<ReportAttachmentVO> reportAttachmentVOList = reportAttachmentService.queryReportAttachmentVOList(reportId);
+//            modelAndView.addObject("reportAttachmentVOList", reportAttachmentVOList);
             modelAndView.setViewName("report_detail");
         }
         return modelAndView;
@@ -82,6 +90,10 @@ public class ReportController {
             throw new NotLoginException("未登录，请先登录！");
         }
         reportDTO.setUserId(user.getId());
+        if (reportDTO.getReportContext() != null && reportDTO.getReportContext().length() > 0) {
+            // 转义HTML特殊字符
+            reportDTO.setReportContext(HtmlUtil.escape(reportDTO.getReportContext()));
+        }
         if (reportDTO.getReportCode() != null && !"".equals(reportDTO.getReportCode())) {
             // 更新
             return reportService.modifyReport(reportDTO);
@@ -91,5 +103,14 @@ public class ReportController {
         }
     }
 
+    /**
+     * 删除实验报告
+     * @return
+     */
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    public String remove(@PathVariable("id") Integer reportId) {
+        reportService.removeReport(reportId);
+        return "redirect:/report/list";
+    }
 
 }

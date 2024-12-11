@@ -30,15 +30,16 @@
     <label>上交截止日期：</label><span>${report.formateDate(report.deadlineTime)}</span>
   </div>
   <div>
-    <label>报告内容：</label><p class="report_context_p">${report.reportContext}</p>
+    <label>报告内容：</label>
+    <div>${report.reportContext}</div>
   </div>
   <div>
-    附件：<br>
-    <c:forEach items="${reportAttachmentVOList}" var="reportAttachmentVO">
-      <a href="${reportAttachmentVO.downloadUrl}">${reportAttachmentVO.fileName}</a>
-      <button onclick="deleteAttachment(${reportAttachmentVO.id})">删除</button>
-      <br/>
-    </c:forEach>
+<%--    附件：<br>--%>
+<%--    <c:forEach items="${reportAttachmentVOList}" var="reportAttachmentVO">--%>
+<%--      <a href="${reportAttachmentVO.downloadUrl}">${reportAttachmentVO.fileName}</a>--%>
+<%--      <button onclick="deleteAttachment(${reportAttachmentVO.id})">删除</button>--%>
+<%--      <br/>--%>
+<%--    </c:forEach>--%>
 
   </div>
 </div>

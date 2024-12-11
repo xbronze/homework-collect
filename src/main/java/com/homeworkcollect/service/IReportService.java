@@ -23,7 +23,7 @@ public interface IReportService {
 
     public ModelAndView modifyReport(ReportDTO reportDTO);
 
-    public int removeReport(Integer reportId);
+    public void removeReport(Integer reportId);
 
     public Report queryReportById(Integer reportId);
 }

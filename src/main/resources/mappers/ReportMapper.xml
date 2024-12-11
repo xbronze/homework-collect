@@ -6,7 +6,9 @@
     <resultMap id="reportResultMap" type="com.homeworkcollect.entity.Report">
         <id property="id" column="id" />
         <result property="userId" column="user_id" />
+        <result property="reportCode" column="report_code" />
         <result property="reportName" column="report_name" />
+        <result property="reportIntroduction" column="report_introduction" />
         <result property="reportContext" column="report_context" />
         <result property="deadlineTime" column="deadline_time" />
         <result property="createTime" column="create_time" />
@@ -15,11 +17,12 @@
     </resultMap>
 
     <insert id="insertReport" keyProperty="id" useGeneratedKeys="true" parameterType="com.homeworkcollect.entity.Report">
-        insert into report (user_id, report_code, report_name, report_context, deadline_time, create_time, update_time)
+        insert into report (user_id, report_code, report_name, report_introduction, report_context, deadline_time, create_time, update_time)
         values (
                 #{userId, jdbcType=INTEGER},
                 #{reportCode, jdbcType=VARCHAR},
                 #{reportName, jdbcType=VARCHAR},
+                #{reportIntroduction, jdbcType=VARCHAR},
                 #{reportContext, jdbcType=VARCHAR},
                 #{deadlineTime, jdbcType=TIMESTAMP},
                 #{createTime,jdbcType=TIMESTAMP},
@@ -32,6 +35,7 @@
         update report
         <set>
             <if test="reportName != null and reportName != ''">report_name = #{reportName},</if>
+            <if test="reportIntroduction != null and reportIntroduction != ''">report_introduction = #{reportIntroduction},</if>
             <if test="reportContext != null and reportContext != ''">report_context = #{reportContext},</if>
             <if test="deadlineTime != null">deadline_time = #{deadlineTime},</if>
             update_time = sysdate()

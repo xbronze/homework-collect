@@ -102,19 +102,20 @@ public class ReportServiceImpl implements IReportService {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
     @Override
-    public int removeReport(Integer reportId) {
+    public void removeReport(Integer reportId) {
         int result = reportMapper.deleteReportById(reportId);
         if (result < 1) {
             throw new RuntimeException("实验报告删除失败");
         }
 
+        // TODO 但是不实现附件的操作
         // TODO 这里先把数据库的附件记录设置为删除状态，文件服务器中的附件本体，先保留，待后续优化
-        int result2 = reportAttachmentMapper.deleteReportAttachmentByReportId(reportId);
-        if (result2 < 0) {
-            throw new RuntimeException("实验报告附件删除失败");
-        }
-
-        return 0;
+//        int result2 = reportAttachmentMapper.deleteReportAttachmentByReportId(reportId);
+//        if (result2 < 0) {
+//            throw new RuntimeException("实验报告附件删除失败");
+//        }
+//
+//        return 0;
     }
 
     @Override
